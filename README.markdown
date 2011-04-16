@@ -1,0 +1,1 @@
+Eerste versie van timetagging application / gecreeerd door het volgen van de rails for Ruby manual
