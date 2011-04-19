@@ -39,4 +39,15 @@ describe PagesController do
     end
   end
   
+  describe "GET 'help'" do
+    it "should be successful" do
+      get 'help'
+      response.should be_success
+    end
+    
+    it "should have a non-blank body" do
+      get 'help'
+      response.body.should_not =~ /<body>\s*<\/body>/ 
+    end
+  end
 end
