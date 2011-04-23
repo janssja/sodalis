@@ -8,7 +8,7 @@ describe PagesController do
       get 'home'
       response.should be_success
     end 
-    
+          
     it "should have a non-blank body" do
       get 'home'
       response.body.should_not =~ /<body>\s*<\/body>/ 
