@@ -3,7 +3,16 @@
 }
 
 body {
-	background: #cff;
+	margin:0;
+	padding:0;
+	width:100%;
+	color:#959595;
+	font:normal 12px/1.8em Arial, Helvetica, sans-serif;
+	background:#eeeedd url(images/main_bg.gif) repeat-y center center;
+}
+
+h.container {
+	width: 710px;
 }
 
 header {
