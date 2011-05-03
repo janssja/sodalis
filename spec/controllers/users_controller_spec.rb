@@ -80,64 +80,9 @@ describe UsersController do
         post :create, :user => @attr
         controller.should be_signed_in
       end
+      
     end
+  
   end
 
-  describe "GET 'edit'" do
-  
-    before(:each) do
-      @user = Factory(:user)
-      test_sign_in(@user)
-    end
-    
-    it "should be succesful" do
-      get :edit, :id => @user
-      response.should be_success
-    end
-    
-    it "should have a link to change the Gravatar" do
-      get :edit, :id => @user
-    end
-  end
-  
-  describe "PUT 'update'" do
-    
-    before(:each) do
-      @user = Factory(:user)
-      test_sign_in(@user)
-    end
-    
-    describe "failure" do
-      
-      before(:each) do
-        @attr = { :name => "", :email => "", :password => "", :password_confirmation => ""}
-      end
-    
-      it "should render the 'edit' page" do
-        put :update, :id => @user, :user => @attr
-        response.should render_template('edit')
-      end
-    end
-    
-    describe "success" do
-      
-      before(:each) do
-        @attr = { :name => "New Name", :email => "user@example.org", :password => "barbaz", :password_confirmation => "barbaz"}
-      end
-      
-      it "should change the user's attributes" do
-        put :update, :id => @user, :user => @attr
-        user = assigns(:user)
-        @user.reload
-        @user.name.should == user.name
-        @user.email.should == user.email
-        @user.encrypted_password.should == user.encrypted_password
-      end
-      
-      it "should have a flash message" do
-        put :update, :id => @user, :user => @attr
-        flash[:success].should =~ /updated/
-      end
-    end
-  end
 end
