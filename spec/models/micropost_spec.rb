@@ -5,7 +5,7 @@ describe Micropost do
   before(:each) do
     @user = Factory(:user)
     @attr = {       
-      :content => "lorum ipsum"
+      :activity => "lorum ipsum"
     }
   end
   
@@ -13,7 +13,7 @@ describe Micropost do
     @user.microposts.create!(@attr)
   end
 
-  describe "user aassociations" do
+  describe "user associations" do
     
     before(:each) do
       @micropost = @user.microposts.create(@attr)
@@ -26,6 +26,20 @@ describe Micropost do
     it "should have the right associated user" do
       @micropost.user_id.should == @user.id
       @micropost.user.should == @user 
+    end
+  end
+  
+  describe "validations" do
+    it "should have a user id" do
+      Micropost.new(@attr).should_not be_valid
+    end
+    
+    it "should require nonblank content" do
+      @user.microposts.build(:activity => "    ").should_not be_valid
+    end
+    
+    it "should reject long activities" do
+      @user.microposts.build(:content => "a" * 141).should_not be_valid
     end
   end
 end
