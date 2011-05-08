@@ -1,0 +1,10 @@
+<tr>
+	<td class="micropost">
+		<span class="content"><%= micropost.activity %> </span>
+		<span class="timestamp">
+			<%= time_ago_in_words(micropost.created_at) %> ago
+		</span>
+		<span class="content">@ <%= micropost.location %></span>
+		
+	</td>
+</tr>
