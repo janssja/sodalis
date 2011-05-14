@@ -1,11 +1,12 @@
+require 'faker'
+
 namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
-    require 'faker'
     Rake::Task['db:reset'].invoke
     make_users
-#    make_microposts
-#    make_relationships
+    make_microposts
+    make_relationships
   end
 end
 
@@ -24,7 +25,9 @@ def make_users
                  :password => password,
                  :password_confirmation => password)
   end
-  
+end
+
+def make_microposts
   User.all(:limit => 6).each do |user|
     50.times do
       user.microposts.create!(:activity => Faker::Lorem.sentence(5),
@@ -32,3 +35,14 @@ def make_users
     end
   end
 end
+
+def make_relationships
+  users = User.all
+  user  = users.first
+  following = users[1..50]
+  followers  = users[3..40]
+  following.each { |followed| user.follow!(followed) }
+  followers.each { |follower| follower.follow!(user) }
+end
+
+

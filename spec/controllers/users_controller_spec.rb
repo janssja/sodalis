@@ -47,6 +47,14 @@ describe UsersController do
       get :show, :id => @user
       assigns(:user).should == @user
     end
+    
+    describe "when signed in as another user" do
+      it "should be succesful" do
+        test_sign_in(Factory(:user, :email => Factory.next(:email)))
+        get :show, :id => @user
+        response.should be_success
+      end
+    end
   end
   
   describe "GET 'new'" do

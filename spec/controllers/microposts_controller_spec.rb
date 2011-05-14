@@ -58,7 +58,7 @@ describe MicropostsController do
 
       it "should have a flash success message" do
         post :create, :micropost => @attr
-        flash[:success].should =~ /micropost created/i
+        flash[:success].should =~ /Activity created/i
       end
     end
   end

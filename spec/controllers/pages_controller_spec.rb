@@ -4,15 +4,26 @@ describe PagesController do
   render_views
   
   describe "GET 'home'" do
-    it "should be successful" do
-      get 'home'
-      response.should be_success
-    end 
-          
-    it "should have a non-blank body" do
-      get 'home'
-      response.body.should_not =~ /<body>\s*<\/body>/ 
-    end              
+  
+    describe "when not signed in" do    
+      it "should be successful" do
+        get 'home'
+        response.should be_success
+      end 
+
+      it "should have a non-blank body" do
+        get 'home'
+        response.body.should_not =~ /<body>\s*<\/body>/ 
+      end    
+    end                  
+  
+    describe "when signed in" do
+      before(:each) do
+        @user = test_sign_in(Factory(:user))
+        other_user = Factory(:user, :email => Factory.next(:email))
+        other_user.follow!(@user)
+      end
+    end
   end
 
   describe "GET 'contact'" do
